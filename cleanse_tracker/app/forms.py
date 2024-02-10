@@ -19,8 +19,9 @@ class RestrictionCreationForm(forms.Form):
     description = forms.TextInput()
 
 
-class CleanseEntryCreationForm(forms.Form):
-    user = forms.ModelChoiceField(queryset=User)
-    cleanse = forms.ModelChoiceField(queryset=Cleanse)
-    restriction = forms.ModelChoiceField(queryset=Restriction)
-    is_completed = forms.BooleanField()
+# fix user, cleanse, restriction fields. Right idea just wrong execution
+# class CleanseEntryCreationForm(forms.Form):
+#     user = forms.ModelChoiceField(queryset=User)
+#     cleanse = forms.ModelChoiceField(queryset=Cleanse)
+#     restriction = forms.ModelChoiceField(queryset=Restriction)
+#     is_completed = forms.BooleanField()
