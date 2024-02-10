@@ -11,7 +11,7 @@ from .serializers import (
     RestrictionSerializer,
 )
 from .models import Cleanse, Restriction, CleanseEntry
-from .forms import UserCreationForm
+from .forms import UserCreationForm, CleanseCreationForm, RestrictionCreationForm
 
 
 class LandingPageView(APIView):
@@ -45,14 +45,17 @@ class CleanseCreateAndDeleteView(CreateAPIView, DestroyAPIView):
     queryset = Cleanse.objects.all()
     serializer_class = CleanseSerializer
 
+    def get(self, request, *args, **kwargs):
+        form = CleanseCreationForm()
+        return render(request, "create_cleanse_form.html", {"form": form})
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED, headers=headers
-        )
+        Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return redirect("home")
 
     def delete(self, request, *args, **kwargs):
         cleanse = self.get_object()
@@ -64,14 +67,17 @@ class RestrictionCreateAndDeleteView(CreateAPIView, DestroyAPIView):
     queryset = Restriction.objects.all()
     serializer_class = RestrictionSerializer
 
+    def get(self, request, *args, **kwargs):
+        form = RestrictionCreationForm()
+        return render(request, "create_restriction_form.html", {"form": form})
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED, headers=headers
-        )
+        Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return redirect("home")
 
     def delete(self, request, *args, **kwargs):
         restriction = self.get_object()
@@ -83,11 +89,14 @@ class CleanseEntryCreateView(CreateAPIView):
     queryset = CleanseEntry.objects.all()
     serializer_class = CleanseEntrySerializer
 
+    def get(self, request, *args, **kwargs):
+        form = RestrictionCreationForm()
+        return render(request, "create_entry_form.html", {"form": form})
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED, headers=headers
-        )
+        Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return redirect("home")

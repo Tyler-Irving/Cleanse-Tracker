@@ -17,7 +17,13 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from app.views import CreateUserAndDeleteView, LandingPageView
+from app.views import (
+    CreateUserAndDeleteView,
+    LandingPageView,
+    CleanseCreateAndDeleteView,
+    CleanseEntryCreateView,
+    RestrictionCreateAndDeleteView,
+)
 
 urlpatterns = [
     path("", LandingPageView.as_view(), name="home"),
@@ -26,4 +32,23 @@ urlpatterns = [
     path(
         "delete_user/<int:pk>/", CreateUserAndDeleteView.as_view(), name="delete_user"
     ),
+    path(
+        "create_cleanse/", CleanseCreateAndDeleteView.as_view(), name="create_cleanse"
+    ),
+    path(
+        "delete_cleanse/<int:pk>/",
+        CleanseCreateAndDeleteView.as_view(),
+        name="delete_cleanse",
+    ),
+    path(
+        "create_restriction/",
+        RestrictionCreateAndDeleteView.as_view(),
+        name="create_restriction",
+    ),
+    path(
+        "delete_restriction/<int:pk>/",
+        RestrictionCreateAndDeleteView.as_view(),
+        name="delete_restriction",
+    ),
+    path("create_entry/", CleanseEntryCreateView.as_view(), name="create_entry"),
 ]
