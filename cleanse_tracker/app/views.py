@@ -79,7 +79,7 @@ class RestrictionCreateAndDeleteView(CreateAPIView, DestroyAPIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class CleanseCreateView(CreateAPIView):
+class CleanseEntryCreateView(CreateAPIView):
     queryset = CleanseEntry.objects.all()
     serializer_class = CleanseEntrySerializer
 
