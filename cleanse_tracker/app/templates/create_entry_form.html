@@ -1,0 +1,8 @@
+{% block content %}
+  <h2>Create a new entry</h2>
+  <form method="POST" action="{% url 'create_entry' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Entry</button>
+  </form>
+{% endblock %}

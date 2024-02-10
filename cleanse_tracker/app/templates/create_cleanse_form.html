@@ -1,0 +1,8 @@
+{% block content %}
+  <h2>Create a new cleanse</h2>
+  <form method="POST" action="{% url 'create_cleanse' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Cleanse</button>
+  </form>
+{% endblock %}
