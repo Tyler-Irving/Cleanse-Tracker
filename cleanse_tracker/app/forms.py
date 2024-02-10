@@ -16,12 +16,12 @@ class CleanseCreationForm(forms.Form):
 
 class RestrictionCreationForm(forms.Form):
     name = forms.CharField(max_length=255)
-    description = forms.TextInput()
+    description = forms.CharField(max_length=255)
 
 
 # fix user, cleanse, restriction fields. Right idea just wrong execution
-# class CleanseEntryCreationForm(forms.Form):
-#     user = forms.ModelChoiceField(queryset=User)
-#     cleanse = forms.ModelChoiceField(queryset=Cleanse)
-#     restriction = forms.ModelChoiceField(queryset=Restriction)
-#     is_completed = forms.BooleanField()
+class CleanseEntryCreationForm(forms.Form):
+    user = forms.ModelChoiceField(queryset=User.objects.all())
+    cleanse = forms.ModelChoiceField(queryset=Cleanse.objects.all())
+    restriction = forms.ModelChoiceField(queryset=Restriction.objects.all())
+    is_completed = forms.BooleanField()
