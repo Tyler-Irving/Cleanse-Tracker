@@ -16,7 +16,18 @@ from .forms import UserCreationForm, CleanseCreationForm, RestrictionCreationFor
 
 class LandingPageView(APIView):
     def get(self, request, *args, **kwargs):
-        return render(request, "landing_page.html")
+        # I dont like this way of getting the most recent cleanse
+        cleanse = Cleanse.objects.last()
+        cleanse_entries = CleanseEntry.objects.all()
+
+        return render(
+            request,
+            "landing_page.html",
+            {
+                "cleanse": cleanse,
+                "cleanse_entries": cleanse_entries,
+            },
+        )
 
 
 class CreateUserAndDeleteView(CreateAPIView, DestroyAPIView):
